@@ -2,6 +2,10 @@
 
 ### ---- General -----------------------------------
 alias c=clear
+alias ~="cd ~"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
 
 ### ---- Bat -----------------------------------
 alias cat="batcat -p"
