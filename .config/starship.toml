@@ -1,3 +1,18 @@
+add_newline = false
+format = """\
+    $directory\
+    $kubernetes\
+    $helm\
+    $aws\
+    $env_var\
+    ${custom.azure}\
+    $git_commit\
+    $git_state\
+    $git_status\
+    $line_break\
+    $character
+    """
+
 [aws]
 symbol = "  "
 
@@ -162,3 +177,13 @@ symbol = " "
 
 [zig]
 symbol = " "
+
+[kubernetes]
+disabled = false
+symbol = "⎈ "
+format = " [$symbol$context( \\($namespace\\))]($style) "
+style = "bright-blue"
+
+
+[gcloud]
+disabled = true
