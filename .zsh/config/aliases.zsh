@@ -6,11 +6,11 @@ alias ~="cd ~"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
+alias f="fd --type file --hidden --no-ignore --follow --exclude .git | fzf"
 
 ### ---- Bat -----------------------------------
-alias cat="batcat -p"
-alias catt=batcat
-
+alias cat="bat -p"
+alias catt=bat
 ### ---- Eza -----------------------------------
 alias ls=eza
 alias l="eza -l --icons"
@@ -43,3 +43,15 @@ alias tf=terraform
 
 ### ---- Kubectl -----------------------------------
 alias k=kubectl
+
+alias kg="kubectl get"
+alias kd="kubectl delete"
+alias kdes="kubectl describe"
+alias ke="kubectl edit"
+alias kc="kubectl create"
+alias kr="kubectl run"
+alias klo="kubectl logs"
+alias klof="kubectl logs -f"
+alias kex="kubectl exec -it"
+alias ksc="kubectl scale"
+alias h=helm

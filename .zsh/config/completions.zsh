@@ -11,26 +11,33 @@ then
         echo "deb [trusted=yes] https://apt.fury.io/rsteube/ /" | sudo tee -a /etc/apt/sources.list.d/fury.list
     fi
 
+    sudo apt update && sudo apt install carapace-bin -y
 fi
 
 
 ### ---- autocompletions -----------------------------------
 fpath=(~/.zsh/completions $fpath)
-autoload -Uz compinit && compinit
 export CARAPACE_BRIDGES='zsh'
+source <(carapace _carapace)
+autoload -Uz compinit && compinit
+zinit cdreplay -q
 
 ### ---- Completion options and styling -----------------------------------
-zstyle ':completion:*' menu select # selectable menu
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'r:|=*' 'l:|=* r:|=*'  # case insensitive completion
-zstyle ':completion:*' special-dirs true # Complete . and .. special directories
-zstyle ':completion:*' list-colors '' # colorize completion lists
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01' # colorize kill list
-zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
-zstyle ':completion:*' group-order 'main commands' 'alias commands' 'external commands'
-export WORDCHARS=${WORDCHARS//[\/]} # remove / from wordchars so that / is a seperator when deleting complete words
-source <(carapace _carapace)
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' 
+zstyle ':completion:*' menu no 
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
-### ---- omz-motions -----------------------------------
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01' 
+
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:*' query-string ''
+
+
+export WORDCHARS=${WORDCHARS//[\/]} # remove / from wordchars so that / is a seperator when deleting complete words
+
+
+### ---- keybinds -----------------------------------
+
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
   function zle-line-init() {
     echoti smkx
@@ -151,3 +158,7 @@ bindkey '\C-x\C-e' edit-command-line
 
 # file rename magick
 bindkey "^[m" copy-prev-shell-word
+# zstyle ':completion:*' menu select # selectable menu
+# zstyle ':completion:*' group-order 'main commands' 'alias commands' 'external commands'
+# zstyle ':completion:*' special-dirs true # Complete . and .. special directories
+# zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
