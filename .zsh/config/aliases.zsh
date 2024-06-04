@@ -55,3 +55,5 @@ alias klof="kubectl logs -f"
 alias kex="kubectl exec -it"
 alias ksc="kubectl scale"
 alias h=helm
+
+alias py=python3

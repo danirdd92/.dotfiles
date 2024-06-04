@@ -3,4 +3,4 @@ if [[ -d "/mnt/c" ]]; then
 fi
 
 
-export PATH="$HOME/.krew/bin:$HOME/.local/bin:/snap/bin:$PATH"
+export PATH="$HOME/.krew/bin:$HOME/.local/bin:/snap/bin:/usr/local/go/bin:/home/linuxbrew/.linuxbrew/bin:$PATH"
